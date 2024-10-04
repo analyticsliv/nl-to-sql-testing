@@ -1,0 +1,13 @@
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+langchain-google-vertexai
+streamlit
+sqlalchemy-bigquery
+google-cloud-aiplatform
+google-cloud-logging
+google-cloud-storage
+google-cloud-bigquery
+python-dotenv
+google-auth
