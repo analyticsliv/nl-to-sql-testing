@@ -11,3 +11,5 @@ google-cloud-storage
 google-cloud-bigquery
 python-dotenv
 google-auth
+matplotlib
+pandas
