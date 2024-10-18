@@ -10,6 +10,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 from google.cloud import bigquery
+from google.cloud import storage
 import json
 import sys
 
@@ -236,13 +237,19 @@ def click_button():
     
     st.session_state.clicked = True
 
-project = 'dx-api-project'
-dataset = 'madkpi_text_to_sql'
+credentials_path = 'gs://nl_to_sql_credentials/text_to_analytics.json'
 
-url = f'bigquery://{project}/{dataset}'
+storage_client = storage.Client()
+bucket = storage_client.bucket('nl_to_sql_credentials')
+credentials = bucket.blob('text_to_analytics.json')
+
+project = 'wex-ga4-bigquery'
+dataset = 'wex_nl_to_sql'
+
+url = f'bigquery://{project}/{dataset}credentials_path={credentials_path}'
 db = SQLDatabase.from_uri(url)
 
-client = bigquery.Client()
+bq_client = bigquery.Client()
 table = client.get_table("wex-ga4-bigquery.wex_nl_to_sql.llm_testing")
 
 google_llm = VertexAI(model = "gemini-1.5-pro-latest", temperature = 0.1)
