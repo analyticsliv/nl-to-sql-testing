@@ -253,7 +253,7 @@ db = SQLDatabase.from_uri(url)
 
 #credentials_, project = google.auth.default()
 #st.write(credentials_)
-bq_client = bigquery.Client(credentials = credentials_)
+bq_client = bigquery.Client()
 table = bq_client.get_table("wex-ga4-bigquery.wex_nl_to_sql.llm_testing")
 
 google_llm = VertexAI(model = "gemini-1.5-pro-latest", temperature = 0.1)
