@@ -163,26 +163,26 @@ st.pyplot(b)'''}
         suffix = function_calling_suffix,
         input_variables = ["input1", "input2"])
 
-    #try:
+    try:
         
-    response = sql_chain.invoke({'input' : question}).replace('```sql', '').replace('```', '')
+        response = sql_chain.invoke({'input' : question}).replace('```sql', '').replace('```', '')
 
-    # except:
+    except:
 
-    #     st.write('SQL Generation Error.')
+        st.write('SQL Generation Error.')
 
-    #     rows = [{'Input' : f'{question}', 'SQL' : 'SQL Generation Error.', 'Data_Description' : '', 'Visualizations' : '', 'API_Calls' : json.dumps({'0' : ''}), 'Remark' : ''}]
-    #     bq_client.insert_rows_json(table, rows)
+        rows = [{'Input' : f'{question}', 'SQL' : 'SQL Generation Error.', 'Data_Description' : '', 'Visualizations' : '', 'API_Calls' : json.dumps({'0' : ''}), 'Remark' : ''}]
+        bq_client.insert_rows_json(table, rows)
 
-    #     st.stop()
+        st.stop()
 
-    # else:
+    else:
         
-    #     response = response.split()
-    #     response = ' '.join(response)
-    #     sql, column_names = response.split('Column Names')
-    #     sql = sql.replace('SQL Query:', '').replace('SQL query:', '')
-    #     column_names = column_names.replace(': ', '').replace(' ', '').split(',')
+        response = response.split()
+        response = ' '.join(response)
+        sql, column_names = response.split('Column Names')
+        sql = sql.replace('SQL Query:', '').replace('SQL query:', '')
+        column_names = column_names.replace(': ', '').replace(' ', '').split(',')
 
     try:
         
@@ -259,7 +259,7 @@ db = SQLDatabase.from_uri(url)
 bq_client = bigquery.Client()
 table = bq_client.get_table("wex-ga4-bigquery.wex_nl_to_sql.llm_testing")
 
-google_llm = VertexAI(model = "gemini-1.5-pro-latest", temperature = 0.1)
+google_llm = VertexAI(model = "gemini-pro", temperature = 0.1)
 
 # st.set_page_config(page_title = 'AI Dashboard - Washington Examiner. (Testing Interface)')
 # st.header('AI Dashboard - Washington Examiner. (Testing Interface)\n\nThis application is powered by Gemini Pro')
