@@ -259,7 +259,7 @@ db = SQLDatabase.from_uri(url)
 bq_client = bigquery.Client()
 table = bq_client.get_table("wex-ga4-bigquery.wex_nl_to_sql.llm_testing")
 
-google_llm = VertexAI(model = "gemini-pro", temperature = 0.1)
+google_llm = VertexAI(model = "gemini-1.5-pro", temperature = 0.1)
 
 # st.set_page_config(page_title = 'AI Dashboard - Washington Examiner. (Testing Interface)')
 # st.header('AI Dashboard - Washington Examiner. (Testing Interface)\n\nThis application is powered by Gemini Pro')
