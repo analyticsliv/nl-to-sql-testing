@@ -239,6 +239,9 @@ def click_button():
     
     st.session_state.clicked = True
 
+st.set_page_config(page_title = 'AI Dashboard - Washington Examiner. (Testing Interface)')
+st.header('AI Dashboard - Washington Examiner. (Testing Interface)\n\nThis application is powered by Gemini Pro')
+
 credentials_path = 'gs://nl_to_sql_credentials/text_to_analytics.json'
 
 storage_client = storage.Client()
@@ -251,15 +254,15 @@ dataset = 'wex_nl_to_sql'
 url = f'bigquery://{project}/{dataset}credentials_path={credentials_path}'
 db = SQLDatabase.from_uri(url)
 
-credentials_, project = google.auth.default()
-st.write(credentials_)
-bq_client = bigquery.Client(credentials = credentials_)
+# credentials_, project = google.auth.default()
+# st.write(credentials_)
+bq_client = bigquery.Client()
 table = bq_client.get_table("wex-ga4-bigquery.wex_nl_to_sql.llm_testing")
 
 google_llm = VertexAI(model = "gemini-1.5-pro-latest", temperature = 0.1)
 
-st.set_page_config(page_title = 'AI Dashboard - Washington Examiner. (Testing Interface)')
-st.header('AI Dashboard - Washington Examiner. (Testing Interface)\n\nThis application is powered by Gemini Pro')
+# st.set_page_config(page_title = 'AI Dashboard - Washington Examiner. (Testing Interface)')
+# st.header('AI Dashboard - Washington Examiner. (Testing Interface)\n\nThis application is powered by Gemini Pro')
 
 question = st.text_input("Input: ", key = 'input')
 
