@@ -1,6 +1,6 @@
 langchain
 langchain-core
-langchain-community
+langchain-community==0.2.12
 langchain-google-genai
 langchain-google-vertexai
 streamlit
