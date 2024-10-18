@@ -16,7 +16,7 @@ import sys
 import google.auth
 
 
-def text_to_analytics (question, table, google_llm, db):
+def text_to_analytics (question, table, google_llm, db, bq_client):
 
     prefix = '''You are a Bigquery SQL expert. Given an input question, first create a syntactically correct Bigquery SQL query to run, then look at the results of the query and return the answer to the input question.
 You must query only the columns that are needed to answer the question. Pay attention to use only the column names you can see in the tables below. Be careful to not query for columns that do not exist. Also, pay attention to which column is in which table.
@@ -172,7 +172,7 @@ st.pyplot(b)'''}
         st.write('SQL Generation Error.')
 
         rows = [{'Input' : f'{question}', 'SQL' : 'SQL Generation Error.', 'Data_Description' : '', 'Visualizations' : '', 'API_Calls' : json.dumps({'0' : ''}), 'Remark' : ''}]
-        client.insert_rows_json(table, rows)
+        bq_client.insert_rows_json(table, rows)
 
         st.stop()
 
@@ -193,7 +193,7 @@ st.pyplot(b)'''}
         st.write('SQL Execution Error')
 
         rows = [{'Input' : f'{question}', 'SQL' : f'{sql}', 'Data_Description' : 'SQL Execution Error.', 'Visualizations' : '', 'API_Calls' : json.dumps({'0' : ''}), 'Remark' : ''}]
-        client.insert_rows_json(table, rows)
+        bq_client.insert_rows_json(table, rows)
 
         st.stop()
 
@@ -229,7 +229,7 @@ st.pyplot(b)'''}
         st.write('API Call Execution Error')
 
         rows = [{'Input' : f'{question}', 'SQL' : f'{sql}', 'Data_Description' : f'{description}', 'Visualizations' : f'{visualizations}', 'API_Calls' : f'{calls_json}', 'Remark' : ''}]
-        client.insert_rows_json(table, rows)
+        bq_client.insert_rows_json(table, rows)
 
         st.stop()
 
@@ -274,7 +274,7 @@ submit = st.button("Ask a question", on_click = click_button)
 
 if st.session_state.clicked:
 
-    sql, description, visualizations, calls_json = text_to_analytics (question, table, google_llm, db)
+    sql, description, visualizations, calls_json = text_to_analytics (question, table, google_llm, db, bq_client)
 
     remark = st.text_input("Remark: ", key = 'remark')
     submit_remark = st.button("Please submit a remark")
@@ -282,4 +282,4 @@ if st.session_state.clicked:
     if submit_remark:
 
         rows = [{'Input' : f'{question}', 'SQL' : f'{sql}', 'Data_Description' : f'{description}', 'Visualizations' : f'{visualizations}', 'API_Calls' : f'{calls_json}', 'Remark' : remark}]
-        client.insert_rows_json(table, rows)        
+        bq_client.insert_rows_json(table, rows)        
