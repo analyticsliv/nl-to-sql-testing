@@ -13,6 +13,8 @@ from google.cloud import bigquery
 from google.cloud import storage
 import json
 import sys
+import google.auth
+
 
 def text_to_analytics (question, table, google_llm, db):
 
