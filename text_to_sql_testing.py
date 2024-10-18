@@ -251,8 +251,8 @@ dataset = 'wex_nl_to_sql'
 url = f'bigquery://{project}/{dataset}credentials_path={credentials_path}'
 db = SQLDatabase.from_uri(url)
 
-credentials_, project = google.auth.default()
-st.write(credentials_)
+#credentials_, project = google.auth.default()
+#st.write(credentials_)
 bq_client = bigquery.Client(credentials = credentials_)
 table = bq_client.get_table("wex-ga4-bigquery.wex_nl_to_sql.llm_testing")
 
