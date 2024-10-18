@@ -13,3 +13,4 @@ python-dotenv
 google-auth
 matplotlib
 pandas
+pybigquery
