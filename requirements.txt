@@ -1,10 +1,10 @@
 langchain
 langchain-core
-langchain-community==0.2.12
+langchain-community
 langchain-google-genai
 langchain-google-vertexai
 streamlit
-sqlalchemy-bigquery
+sqlalchemy-bigquery==1.9.0
 google-cloud-aiplatform
 google-cloud-logging
 google-cloud-storage
