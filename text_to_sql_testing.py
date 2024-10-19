@@ -252,7 +252,7 @@ credentials = bucket.blob('text_to_analytics.json')
 project = 'wex-ga4-bigquery'
 dataset = 'wex_nl_to_sql'
 
-url = f'bigquery://{project}/{dataset}credentials_path={credentials_path}'
+url = f'bigquery://{project}/{dataset}'#credentials_path={credentials_path}'
 db = SQLDatabase.from_uri(url)
 
 # credentials_, project = google.auth.default()
