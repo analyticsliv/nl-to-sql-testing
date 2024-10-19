@@ -184,23 +184,23 @@ st.pyplot(b)'''}
         sql = sql.replace('SQL Query:', '').replace('SQL query:', '')
         column_names = column_names.replace(': ', '').replace(' ', '').split(',')
 
-    # try:
-    st.write(sql)
-    st.write(column_names)
-    data = pd.DataFrame(eval(db.run(sql)), columns = column_names)
+    try:
+    # st.write(sql)
+    # st.write(column_names)
+        data = pd.DataFrame(eval(db.run(sql)), columns = column_names)
 
-    # except:
+    except:
 
-    #     st.write('SQL Execution Error')
+        st.write('SQL Execution Error')
 
-    #     rows = [{'Input' : f'{question}', 'SQL' : f'{sql}', 'Data_Description' : 'SQL Execution Error.', 'Visualizations' : '', 'API_Calls' : json.dumps({'0' : ''}), 'Remark' : ''}]
-    #     bq_client.insert_rows_json(table, rows)
+        rows = [{'Input' : f'{question}', 'SQL' : f'{sql}', 'Data_Description' : 'SQL Execution Error.', 'Visualizations' : '', 'API_Calls' : json.dumps({'0' : ''}), 'Remark' : ''}]
+        bq_client.insert_rows_json(table, rows)
 
-    #     st.stop()
+        st.stop()
 
-    # else:
+    else:
         
-    #     dataframe_string = pd.DataFrame(eval(db.run(sql)), columns = column_names).to_string()
+        dataframe_string = pd.DataFrame(eval(db.run(sql)), columns = column_names).to_string()
         
     description = describer.invoke({'input' : dataframe_string})
     visualizations = visualizer.invoke({'input' : description})
