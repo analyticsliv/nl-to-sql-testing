@@ -7,6 +7,8 @@ from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool
 from langchain_core.prompts import PromptTemplate
 from langchain_core.prompts import FewShotPromptTemplate, PromptTemplate, MessagesPlaceholder
 import streamlit as st
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import pandas as pd
 from google.cloud import bigquery
