@@ -56,7 +56,13 @@ Column Names: '''
         "input" : "Total daily users who viewed sections opinion, policy, and news in September 2024",
         "query" : "SELECT date, SUM(Opinion) AS Opinion, SUM(Policy) AS Policy, SUM(News) AS News FROM(SELECT date, CASE WHEN SPLIT(LTRIM(unifiedPagePathScreen, '/'),'/')[0] = 'opinion' THEN totalUsers ELSE 0 END AS Opinion, CASE WHEN SPLIT(LTRIM(unifiedPagePathScreen, '/'),'/')[0] = 'policy' THEN totalUsers ELSE 0 END AS Policy, CASE WHEN SPLIT(LTRIM(unifiedPagePathScreen, '/'),'/')[0] = 'news' THEN totalUsers ELSE 0 END AS News FROM `wex-ga4-bigquery.wex_nl_to_sql.Section` WHERE date BETWEEN '20240901' AND '20240930') GROUP BY date",
         "Column Names" : "date, Opinion, Policy, News"
+    },
+    {
+        "input" : "What is the correlation between session duration and page views in 2024?",
+        "query" : "SELECT CORR(averageSessionDuration, screenPageViews) AS Correlation_Coefficient FROM `wex-ga4-bigquery.wex_nl_to_sql.Section` WHERE date BETWEEN '20240101' AND '20241231'",
+        "Column Names" : "Correlation_Coefficient"
     }
+    
 ]
 
     example_prompt = PromptTemplate.from_template("Question: {input}\nSQL query: {query}\nColumn Names: {Column Names}")
